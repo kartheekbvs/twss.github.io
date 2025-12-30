@@ -1,386 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="robots" content="noarchive">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kartheek BVS - Portfolio</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<style type="text/css">
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartheek BVS | Cinematic Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-glow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
 
-html {
-    scroll-behavior: smooth;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-body {
-    line-height: 1.6;
-    color: #ffffff;
-    background: #000;
-    overflow-x: hidden;
-}
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-/* Music Control Button */
-.music-control {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 10001;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+        /* Music Controller - Pulsing MJ Style */
+        .music-control {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 10001;
+            background: #fff;
+            color: #000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255,255,255,0.4);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .music-control.playing {
+            animation: pulse 1.5s infinite;
+            background: #ff0055; /* MJ Thriller Red when playing */
+            color: #fff;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 85, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255, 0, 85, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 85, 0); }
+        }
 
-.music-control:hover {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.2);
-}
+        /* Navigation - Frosted Glass */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 2px; }
+        .logo a { color: #fff; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { 
+            text-decoration: none; color: #aaa; font-size: 0.8rem; 
+            font-weight: 700; text-transform: uppercase; transition: 0.3s;
+        }
+        .nav-links a:hover { color: #fff; letter-spacing: 1px; }
 
-/* Navigation */
-nav {
-    position: fixed;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem 0;
-    z-index: 1000;
-}
+        /* CHAPTER SYSTEM */
+        .section {
+            min-height: 100vh;
+            padding: 100px 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-.nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-}
+        /* Visual Themes per Chapter */
+        #home { background: radial-gradient(circle at 50% 50%, #111 0%, #000 100%); }
+        #about { background: radial-gradient(circle at 0% 0%, #001a33 0%, #000 50%); } /* Electric Blue */
+        #experience { background: radial-gradient(circle at 100% 0%, #330000 0%, #000 50%); } /* Blood Red */
+        #skills { background: radial-gradient(circle at 0% 100%, #003311 0%, #000 50%); } /* Cyber Green */
+        #education { background: radial-gradient(circle at 100% 100%, #1a0033 0%, #000 50%); } /* Royal Purple */
+        #contact { background: #000; }
 
-.logo a {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: #ffffff;
-    text-decoration: none;
-    letter-spacing: -1px;
-}
+        .section h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            text-align: center;
+            background: linear-gradient(to bottom, #fff, #444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section h2::before {
+            content: "CHAPTER //";
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 8px;
+            color: #ff0055;
+            -webkit-text-fill-color: #ff0055;
+            margin-bottom: 1rem;
+        }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-}
+        /* Cards & Containers */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            transition: 0.5s;
+        }
+        .glass-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-10px);
+            box-shadow: var(--accent-glow);
+        }
 
-.nav-links a {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: 0.3s;
-}
+        /* Hero Styling */
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 4px solid #fff;
+            padding: 5px;
+            box-shadow: 0 0 50px rgba(255,255,255,0.2);
+        }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        
+        h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.5rem, 4vw, 3rem); margin-bottom: 1rem; }
+        .typewriter { font-weight: 300; font-size: 1.5rem; color: #888; letter-spacing: 2px; }
 
-/* CHAPTER COLOR SECTIONS */
-.section {
-    padding: 8rem 2rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+        /* Skills Tag Cloud */
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .skill-tag {
+            background: #fff;
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+        .skill-tag:hover { background: #ff0055; color: #fff; transform: scale(1.1); }
 
-/* Chapter 1: Home - The Beginning */
-#home { 
-    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); 
-}
+        /* Form Inputs */
+        input, textarea {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: #fff;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        button:hover { background: #ff0055; color: #fff; }
 
-/* Chapter 2: About - The Identity (Midnight Blue) */
-#about { 
-    background: linear-gradient(180deg, #000000 0%, #0a1128 50%, #000000 100%); 
-}
+        /* Modal */
+        .modal {
+            display: none; position: fixed; z-index: 2000; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.95);
+        }
+        .modal-content {
+            position: relative; top: 50%; transform: translateY(-50%);
+            max-width: 900px; margin: auto; padding: 20px;
+        }
 
-/* Chapter 3: Experience - The Journey (Deep Crimson) */
-#experience { 
-    background: linear-gradient(180deg, #000000 0%, #1a0808 50%, #000000 100%); 
-}
-
-/* Chapter 4: Skills - The Arsenal (Deep Emerald) */
-#skills { 
-    background: linear-gradient(180deg, #000000 0%, #061a12 50%, #000000 100%); 
-}
-
-/* Chapter 5: Education - The Foundation (Deep Purple) */
-#education { 
-    background: linear-gradient(180deg, #000000 0%, #12051a 50%, #000000 100%); 
-}
-
-/* Chapter 6: Contact - The Connection (Dark Gray) */
-#contact { 
-    background: linear-gradient(180deg, #000000 0%, #111 100%); 
-}
-
-.section h2 {
-    text-align: center;
-    font-size: 3.5rem;
-    margin-bottom: 4rem;
-    font-weight: 900;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-}
-
-/* Adding "Chapter" label */
-.section h2::before {
-    content: "CHAPTER";
-    display: block;
-    font-size: 0.9rem;
-    letter-spacing: 10px;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 10px;
-}
-
-/* Hero Content */
-.hero-content {
-    text-align: center;
-    z-index: 2;
-}
-
-.profile-photo {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    margin: 0 auto 2rem;
-    border: 3px solid rgba(255, 255, 255, 0.2);
-    overflow: hidden;
-}
-
-.profile-photo img { width: 100%; height: 100%; object-fit: cover; }
-
-.typewriter { font-size: 1.8rem; min-height: 2em; font-weight: 300; margin-bottom: 2rem; }
-
-/* Resume Modal */
-.modal {
-    display: none; position: fixed; z-index: 10000; left: 0; top: 0;
-    width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);
-}
-.modal-content {
-    background-color: #111; margin: 5% auto; padding: 20px; width: 80%;
-    max-width: 800px; border-radius: 8px; text-align: center;
-}
-.modal-content iframe { width: 100%; height: 500px; border: none; }
-
-/* Forms & Buttons */
-.download-btn, button {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff; padding: 1rem 2rem; border-radius: 50px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer; transition: 0.3s; text-decoration: none;
-}
-.download-btn:hover, button:hover { background: #fff; color: #000; }
-
-/* Timeline & Skills Grid */
-.about-content, .timeline, .skills-container, .education-timeline, .contact-content {
-    max-width: 900px; margin: 0 auto; position: relative;
-    z-index: 2;
-}
-
-.skill-category {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-    padding: 2rem; border-radius: 15px; margin-bottom: 2rem;
-}
-
-.skill-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-.skill-tag { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; }
-
-/* Footer */
-footer { padding: 3rem; text-align: center; border-top: 1px solid #222; background: #000; }
-
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .section h2 { font-size: 2.5rem; }
-}
-</style>
+        footer { padding: 4rem; text-align: center; font-size: 0.8rem; color: #444; letter-spacing: 2px; }
+    </style>
 </head>
 <body>
 
-<audio id="bgMusic" loop>
-    <source src="https://cs1.mp3.pm/listen/54243153/Uitra1NreE8xRWxBRVdhenVDNUl4VjhxdTJaTlZtZCt5WWFyLzRmLzBlOFd3dVFxZnVRM1RVcUV5Z2xGZDZ6L1FpWnFLSW9iZkk3OWpFc2M5RDdKWFVWcUZLNVZucG5Fa1FMakh1SjFyaTdCTHZYTlVkc2F6bFN3QVlxcll6TUc/Michel_Jackson_-_They_don_t_really_care_about_us_1995_(mp3.pm).mp3" type="audio/mpeg">
-</audio>
+    <audio id="bgMusic" loop>
+        <source src="https://cs1.mp3.pm/listen/54243153/Uitra1NreE8xRWxBRVdhenVDNUl4VjhxdTJaTlZtZCt5WWFyLzRmLzBlOFd3dVFxZnVRM1RVcUV5Z2xGZDZ6L1FpWnFLSW9iZkk3OWpFc2M5RDdKWFVWcUZLNVZucG5Fa1FMakh1SjFyaTdCTHZYTlVkc2F6bFN3QVlxcll6TUc/Michel_Jackson_-_They_don_t_really_care_about_us_1995_(mp3.pm).mp3" type="audio/mpeg">
+    </audio>
 
-<div class="music-control" onclick="toggleMusic()">
-    <i id="musicIcon" class="fas fa-volume-mute"></i>
-</div>
-
-<nav>
-    <div class="nav-content">
-        <div class="logo"><a href="#home">Kartheek BVS</a></div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <div class="music-control" id="musicBtn" onclick="toggleMusic()">
+        <i id="musicIcon" class="fas fa-music"></i>
     </div>
-</nav>
 
-<section id="home" class="section">
-    <div class="hero-content">
-        <div class="profile-photo">
-            <img src="https://media.licdn.com/dms/image/v2/D4E03AQEN2F3z_j7eyQ/profile-displayphoto-shrink_400_400/B4EZd4K2i0H0Ak-/0/1750067801195?e=1764201600&v=beta&t=4tULXNowg_IfKbH-u30NL1bIQgoJrP1ylvYGGV-Vqq0" alt="Kartheek BVS">
-        </div>
-        <h1>Hi, I'm Kartheek BVS</h1>
-        <p class="typewriter"></p>
-        <div class="download-resume">
-            <a href="#" class="download-btn" onclick="showResume(); return false;">View Resume</a>
-        </div>
-    </div>
-</section>
-
-<section id="about" class="section">
-    <h2>About Me</h2>
-    <div class="about-content">
-        <p>I am a passionate software developer with expertise in full-stack development. My journey in technology has equipped me with strong problem-solving skills.</p>
-        <p>Motivated and versatile Computer Engineering student with a strong foundation in building scalable applications using HTML, CSS, JavaScript, PHP, and MySQL.</p>
-    </div>
-</section>
-
-<section id="experience" class="section">
-    <h2>Experience</h2>
-    <div class="timeline">
-        <div class="skill-category">
-            <h3>Web Development Intern</h3>
-            <p class="timeline-date">June 2024 - December 2024 | Thought Wave</p>
-            <ul>
-                <li>Developed responsive UI components using HTML, CSS, JS.</li>
-                <li>Integrated front-end with PHP/MySQL back-end.</li>
+    <nav>
+        <div class="nav-content">
+            <div class="logo"><a href="#home">KARTHEEK // BVS</a></div>
+            <ul class="nav-links">
+                <li><a href="#about">Identity</a></li>
+                <li><a href="#experience">Journey</a></li>
+                <li><a href="#skills">Arsenal</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
-    </div>
-</section>
+    </nav>
 
-<section id="skills" class="section">
-    <h2>My Skills</h2>
-    <div class="skills-container">
-        <div class="skill-category">
-            <h3>The Arsenal</h3>
+    <section id="home" class="section">
+        <div class="profile-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQEN2F3z_j7eyQ/profile-displayphoto-shrink_400_400/B4EZd4K2i0H0Ak-/0/1750067801195?e=1764201600&v=beta&t=4tULXNowg_IfKbH-u30NL1bIQgoJrP1ylvYGGV-Vqq0" alt="Kartheek">
+        </div>
+        <h1>KARTHEEK BVS</h1>
+        <p class="typewriter"></p>
+        <br><br>
+        <button onclick="showResume()" style="width: auto; padding: 15px 40px;">VIEW DOSSIER</button>
+    </section>
+
+    <section id="about" class="section">
+        <h2>Identity</h2>
+        <div class="glass-card">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">I am a full-stack architect specializing in high-performance digital solutions. My code is a mix of logic and art, designed to push boundaries.</p>
+            <p style="color: #888;">Currently pursuing Computer Engineering at Chandigarh University, maintaining a focus on scalability and user-centric design.</p>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <h2>Journey</h2>
+        <div class="glass-card">
+            <h3 style="color: #ff0055;">Thought Wave // Web Intern</h3>
+            <p style="margin-bottom: 1rem; font-weight: 700;">2024 - PRESENT</p>
+            <ul style="list-style: none; color: #ccc;">
+                <li>+ Engineered responsive interfaces using Modern JS</li>
+                <li>+ Optimized back-end database queries via PHP/MySQL</li>
+                <li>+ Reduced asset load times by 40%</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <h2>Arsenal</h2>
+        <div class="glass-card">
             <div class="skill-tags">
-                <div class="skill-tag">Python</div>
-                <div class="skill-tag">Java</div>
-                <div class="skill-tag">PHP</div>
-                <div class="skill-tag">JavaScript</div>
-                <div class="skill-tag">MySQL</div>
-                <div class="skill-tag">React</div>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Algorithms</span>
+                <span class="skill-tag">Machine Learning</span>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="education" class="section">
-    <h2>Education</h2>
-    <div class="education-timeline">
-        <div class="skill-category">
-            <h3>B.E. in Computer Engineering</h3>
-            <p>Chandigarh University | 2023 - 2027</p>
+    <section id="contact" class="section">
+        <h2>Connect</h2>
+        <div class="glass-card">
+            <form id="contact-form">
+                <input type="text" placeholder="IDENTITY (NAME)" required>
+                <input type="email" placeholder="EMAIL ADDRESS" required>
+                <textarea rows="4" placeholder="TRANSMISSION (MESSAGE)"></textarea>
+                <button type="submit">SEND SIGNAL</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>DESIGNED BY KARTHEEK BVS // &copy; 2025 ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <div id="resumeModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeResume()" style="float:right; cursor:pointer; color:#ff0055; font-weight:900;">[ CLOSE ]</span>
+            <iframe id="resumeFrame" src="" style="width:100%; height:70vh; border:none; margin-top:20px;"></iframe>
         </div>
     </div>
-</section>
 
-<section id="contact" class="section">
-    <h2>Contact</h2>
-    <div class="contact-content">
-        <form id="contact-form">
-            <input type="text" placeholder="Name" required style="width:100%; margin-bottom:10px; padding:15px; background:#222; border:none; color:white;"><br>
-            <input type="email" placeholder="Email" required style="width:100%; margin-bottom:10px; padding:15px; background:#222; border:none; color:white;"><br>
-            <textarea placeholder="Message" rows="5" style="width:100%; margin-bottom:10px; padding:15px; background:#222; border:none; color:white;"></textarea><br>
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
-</section>
+    <script>
+        // Typing Effect
+        const typewriter = document.querySelector('.typewriter');
+        const phrases = ['FULL STACK ARCHITECT', 'PROBLEM SOLVER', 'TECH ENTHUSIAST'];
+        let i = 0, j = 0, current = '', isDeleting = false;
 
-<footer>
-    <p>&copy; 2025 Kartheek BVS. All rights reserved.</p>
-</footer>
+        function typeLoop() {
+            current = phrases[i];
+            if (isDeleting) {
+                typewriter.textContent = current.substring(0, j - 1);
+                j--;
+            } else {
+                typewriter.textContent = current.substring(0, j + 1);
+                j++;
+            }
 
-<div id="resumeModal" class="modal">
-    <div class="modal-content">
-        <span onclick="closeResume()" style="float:right; cursor:pointer; font-size:2rem;">&times;</span>
-        <iframe src="" id="resumeFrame"></iframe>
-        <br><br>
-        <a href="#" class="download-btn">Download PDF</a>
-    </div>
-</div>
+            if (!isDeleting && j === current.length) {
+                isDeleting = true;
+                setTimeout(typeLoop, 2000);
+            } else if (isDeleting && j === 0) {
+                isDeleting = false;
+                i = (i + 1) % phrases.length;
+                setTimeout(typeLoop, 500);
+            } else {
+                setTimeout(typeLoop, isDeleting ? 50 : 100);
+            }
+        }
+        typeLoop();
 
-<script>
-// Typing Animation
-const typewriter = document.querySelector('.typewriter');
-const texts = ['Full Stack Developer', 'Problem Solver', 'Michael Jackson Fan'];
-let textIndex = 0, charIndex = 0, isDeleting = false;
+        // Music System
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
 
-function type() {
-    const currentText = texts[textIndex];
-    if (isDeleting) {
-        typewriter.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typewriter.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-    }
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicBtn.classList.add('playing');
+            } else {
+                music.pause();
+                musicBtn.classList.remove('playing');
+            }
+        }
 
-    if (!isDeleting && charIndex === currentText.length) {
-        isDeleting = true;
-        setTimeout(type, 1500);
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-        setTimeout(type, 500);
-    } else {
-        setTimeout(type, isDeleting ? 50 : 100);
-    }
-}
-type();
+        // Modal Logic
+        function showResume() {
+            document.getElementById('resumeFrame').src = 'resume.pdf';
+            document.getElementById('resumeModal').style.display = 'block';
+        }
+        function closeResume() {
+            document.getElementById('resumeModal').style.display = 'none';
+        }
 
-// Music Logic
-const music = document.getElementById('bgMusic');
-const musicIcon = document.getElementById('musicIcon');
-
-function toggleMusic() {
-    if (music.paused) {
-        music.play();
-        musicIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
-    } else {
-        music.pause();
-        musicIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
-    }
-}
-
-// Resume Logic
-function showResume() {
-    document.getElementById('resumeFrame').src = 'resume.pdf';
-    document.getElementById('resumeModal').style.display = 'block';
-}
-function closeResume() {
-    document.getElementById('resumeModal').style.display = 'none';
-}
-
-// Anti-Inspect (as requested in your code)
-document.addEventListener('contextmenu', e => e.preventDefault());
-</script>
-
+        // Prevent Right Click
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
 </body>
 </html>
